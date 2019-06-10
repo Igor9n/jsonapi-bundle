@@ -122,9 +122,13 @@ class FieldManager
 
 
         $this->setRelations($fieldName);
-        $this->fields[$fieldName]['relation_alias'] = end($this->relations)['alias'];
-        $this->fields[$fieldName]['metadata'] = $this->getFieldMetaData($this->fields[$fieldName]['entity'], $this->fields[$fieldName]['field']);
+        $entity = empty($this->fields[$fieldName]['entity-path'])
+            ? $this->fields[$fieldName]['entity']
+            : end($this->fields[$fieldName]['entity-path']);
 
+        $this->fields[$fieldName]['relation_alias'] = end($this->relations)['alias'];
+
+        $this->fields[$fieldName]['metadata'] = $this->getFieldMetaData($entity, $this->fields[$fieldName]['field']);
         return $this->fields[$fieldName];
     }
 
