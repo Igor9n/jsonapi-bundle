@@ -1,3 +1,5 @@
+[![Latest Stable Version](https://poser.pugx.org/igor9n/jsonapi-bundle/version)](https://packagist.org/packages/igor9n/jsonapi-bundle)
+
 JsonApiBundle For Symfony
 =========================
 
