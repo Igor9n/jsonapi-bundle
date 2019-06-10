@@ -6,10 +6,6 @@
     "keywords": ["generator", "code generator", "json-api", "symfony", "php", "RESTful"],
     "authors": [
         {
-            "name": "Hamid Paknahad",
-            "email": "hp.paknahad@gmail.com"
-        },
-        {
             "name": "Ihor Kruhliak",
             "email": "id.igrec@gmail.com"
         }
