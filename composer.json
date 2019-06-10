@@ -1,6 +1,6 @@
 {
     "description": "Fixed paknahad/jsonapi-bundle",
-    "name": "igor9n/paknahad-jsonapi-bundle",
+    "name": "igor9n/jsonapi-bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "keywords": ["generator", "code generator", "json-api", "symfony", "php", "RESTful"],
