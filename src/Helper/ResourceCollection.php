@@ -52,10 +52,10 @@ class ResourceCollection implements IteratorAggregate, PaginationLinkProviderInt
     /**
      * ResourceCollection constructor.
      *
-     * @param RequestStack     $requestStack
+     * @param RequestStack $requestStack
      * @param FinderCollection $finderCollection
-     * @param Paginator        $paginator
-     * @param FieldManager     $fieldManager
+     * @param Paginator $paginator
+     * @param FieldManager $fieldManager
      */
     public function __construct(RequestStack $requestStack, FinderCollection $finderCollection, Paginator $paginator, FieldManager $fieldManager)
     {
@@ -192,6 +192,12 @@ class ResourceCollection implements IteratorAggregate, PaginationLinkProviderInt
     protected function addRelationsToQuery()
     {
         $relations = $this->fieldManager->getRelations();
+        $aliases = [];
+        foreach ($relations as $relation) {
+            array_push($aliases, $relation['alias']);
+        }
+
+        $index = 0;
         foreach ($relations as $entity => $relation) {
             if ($entity === $this->fieldManager->getRootEntity()) {
                 continue;
@@ -199,8 +205,13 @@ class ResourceCollection implements IteratorAggregate, PaginationLinkProviderInt
 
             $sourceAlias = FieldManager::ROOT_ALIAS;
             if ($relations[$relation['entity']]['sourceEntity'] !== $this->fieldManager->getRootEntity()) {
-                $sourceAlias = $relations[$relation['entity']]['alias'];
+                if ($index > 0) {
+                    $sourceAlias = $aliases[$index - 1];
+                } else {
+                    $sourceAlias = $aliases[0];
+                }
             }
+            $index++;
 
             $this->query->leftJoin(sprintf('%s.%s', $sourceAlias, $relation['entity']), $relation['alias']);
         }
